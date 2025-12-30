@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lightit\Shared\App;
+namespace Lightit\Doctors\Domain\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
