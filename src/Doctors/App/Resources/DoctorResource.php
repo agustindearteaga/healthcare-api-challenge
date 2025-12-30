@@ -8,6 +8,9 @@ use Dedoc\Scramble\Attributes\SchemaName;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Doctor
+ */
 #[SchemaName('Doctor')]
 class DoctorResource extends JsonResource
 {
