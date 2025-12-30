@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Lightit\Doctors\App\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use Dedoc\Scramble\Attributes\SchemaName;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 #[SchemaName('Doctor')]
 class DoctorResource extends JsonResource

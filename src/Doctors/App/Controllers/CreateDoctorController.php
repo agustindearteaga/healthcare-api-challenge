@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Lightit\Doctors\App\Controllers;
 
 use Dedoc\Scramble\Attributes\Group;
-use Lightit\Doctors\App\Requests\UpsertDoctorRequest;
-use Illuminate\Http\JsonResource;
 use Illuminate\Http\JsonResponse;
+use Lightit\Doctors\App\Requests\UpsertDoctorRequest;
 use Lightit\Doctors\App\Resources\DoctorResource;
 use Lightit\Doctors\Domain\Actions\CreateDoctorAction;
 
