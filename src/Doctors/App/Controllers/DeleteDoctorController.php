@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Lightit\Doctors\Domain\Models\Doctor;
 
 #[Group('Doctors')]
-class DeleteDoctorController
+final readonly class DeleteDoctorController
 {
     public function __invoke(Doctor $doctor): JsonResponse
     {
