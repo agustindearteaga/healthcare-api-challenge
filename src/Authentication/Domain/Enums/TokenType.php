@@ -8,4 +8,3 @@ enum TokenType: string
 {
     case Bearer = 'Bearer';
 }
-
