@@ -6,6 +6,7 @@ namespace Lightit\Authentication\App\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Lightit\Authentication\Domain\DataTransferObjects\CredentialsDto;
 
 class LoginRequest extends FormRequest
@@ -18,7 +19,7 @@ class LoginRequest extends FormRequest
     {
         return [
             self::EMAIL => ['required', Rule::email()->strict()],
-            self::PASSWORD => ['required'],
+            self::PASSWORD => ['required', Password::defaults()],
         ];
     }
 

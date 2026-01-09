@@ -6,15 +6,16 @@ namespace Lightit\Authentication\Domain\Actions;
 
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Lightit\Authentication\Domain\DataTransferObjects\LoginDto;
+use Lightit\Authentication\Domain\Enums\TokenType;
 use Lightit\Users\Domain\Models\User;
 use PHPOpenSourceSaver\JWTAuth\Factory as JWTAuth;
 use PHPOpenSourceSaver\JWTAuth\JWTGuard;
 
-final class LoginByUserAction
+final readonly class LoginByUserAction
 {
     public function __construct(
-        private readonly AuthFactory $factory,
-        private readonly JWTAuth $jwtAuth,
+        private AuthFactory $factory,
+        private JWTAuth $jwtAuth,
     ) {
     }
 
@@ -28,7 +29,7 @@ final class LoginByUserAction
 
         return new LoginDto(
             accessToken: $token,
-            tokenType: 'bearer',
+            tokenType: TokenType::Bearer->value,
             expiresIn: $this->jwtAuth->getTTL() * 60,
         );
     }

@@ -7,15 +7,16 @@ namespace Lightit\Authentication\Domain\Actions;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Lightit\Authentication\Domain\DataTransferObjects\CredentialsDto;
 use Lightit\Authentication\Domain\DataTransferObjects\LoginDto;
+use Lightit\Authentication\Domain\Enums\TokenType;
 use Lightit\Shared\App\Exceptions\Http\UnauthorizedException;
 use PHPOpenSourceSaver\JWTAuth\Factory as JWTAuth;
 use PHPOpenSourceSaver\JWTAuth\JWTGuard;
 
-final class LoginAction
+final readonly class LoginAction
 {
     public function __construct(
-        private readonly AuthFactory $factory,
-        private readonly JWTAuth $jwtAuth,
+        private AuthFactory $factory,
+        private JWTAuth $jwtAuth,
     ) {
     }
 
@@ -27,14 +28,17 @@ final class LoginAction
         /** @var JWTGuard $guard */
         $guard = $this->factory->guard();
 
-        if (! $token = $guard->attempt($credentials->toArray())) {
+        if (! $token = $guard->attempt([
+            'email' => $credentials->email,
+            'password' => $credentials->password,
+        ])) {
             throw new UnauthorizedException();
         }
 
         /** @var string $token */
         return new LoginDto(
             accessToken: $token,
-            tokenType: 'Bearer',
+            tokenType: TokenType::Bearer->value,
             expiresIn: $this->jwtAuth->getTTL() * 60,
         );
     }
