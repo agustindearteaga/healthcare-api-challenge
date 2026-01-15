@@ -21,6 +21,3 @@ final readonly class ListDoctorController
             ->response();
     }
 }
-
-
-

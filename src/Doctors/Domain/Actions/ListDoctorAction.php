@@ -22,6 +22,3 @@ class ListDoctorAction
             ->paginate();
     }
 }
-
-
-
