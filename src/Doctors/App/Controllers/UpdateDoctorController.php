@@ -12,15 +12,14 @@ use Lightit\Doctors\Domain\Actions\UpsertDoctorAction;
 use Lightit\Doctors\Domain\Models\Doctor;
 
 #[Group('Doctors')]
-final readonly class UpdateDoctorController
+final class UpdateDoctorController
 {
     public function __invoke(
         Doctor $doctor,
         UpsertDoctorRequest $request,
         UpsertDoctorAction $upsertDoctorAction,
     ): JsonResponse {
-        $doctorName = $request->string(UpsertDoctorRequest::NAME)->toString();
-        $doctor = $upsertDoctorAction->execute($doctor, $doctorName);
+        $doctor = $upsertDoctorAction->execute($doctor, $request->getName());
 
         return DoctorResource::make($doctor)
             ->response();

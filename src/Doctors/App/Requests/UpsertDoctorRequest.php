@@ -16,4 +16,9 @@ class UpsertDoctorRequest extends FormRequest
             self::NAME => ['required', 'string', 'max:50'],
         ];
     }
+
+    public function getName(): string
+    {
+        return $this->string(self::NAME)->toString();
+    }
 }
