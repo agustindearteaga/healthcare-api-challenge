@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Route;
+use Lightit\Authentication\App\Controllers\{LoginController, LogoutController, RefreshController};
 use Lightit\Users\App\Controllers\{GetUserController, DeleteUserController, ListUserController, StoreUserController, UpdateUserController};
 use Lightit\Doctors\App\Controllers\{CreateDoctorController, DeleteDoctorController, GetDoctorController, ListDoctorController, UpdateDoctorController};
 
