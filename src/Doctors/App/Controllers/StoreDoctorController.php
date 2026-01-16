@@ -8,15 +8,15 @@ use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\JsonResponse;
 use Lightit\Doctors\App\Requests\UpsertDoctorRequest;
 use Lightit\Doctors\App\Resources\DoctorResource;
-use Lightit\Doctors\Domain\Actions\StoreDoctorAction;
+use Lightit\Doctors\Domain\Actions\UpsertDoctorAction;
 
 #[Group('Doctors')]
 final readonly class StoreDoctorController
 {
-    public function __invoke(UpsertDoctorRequest $request, StoreDoctorAction $storeDoctorAction): JsonResponse
+    public function __invoke(UpsertDoctorRequest $request, UpsertDoctorAction $upsertDoctorAction): JsonResponse
     {
         $doctorName = $request->string(UpsertDoctorRequest::NAME)->toString();
-        $doctor = $storeDoctorAction->execute($doctorName);
+        $doctor = $upsertDoctorAction->execute(null, $doctorName);
 
         return DoctorResource::make($doctor)
             ->response()

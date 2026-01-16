@@ -6,13 +6,16 @@ namespace Lightit\Doctors\Domain\Actions;
 
 use Lightit\Doctors\Domain\Models\Doctor;
 
-class UpdateDoctorAction
+class UpsertDoctorAction
 {
-    public function execute(Doctor $doctor, string $doctorName): Doctor
+    public function execute(Doctor|null $doctor = null, string $doctorName): Doctor
     {
+        $doctor ??= new Doctor();
+
         $doctor->name = $doctorName;
         $doctor->saveOrFail();
 
         return $doctor;
     }
 }
+
