@@ -6,7 +6,7 @@ use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Route;
 use Lightit\Authentication\App\Controllers\{LoginController, LogoutController, RefreshController};
 use Lightit\Users\App\Controllers\{GetUserController, DeleteUserController, ListUserController, StoreUserController, UpdateUserController};
-use Lightit\Doctors\App\Controllers\{CreateDoctorController, DeleteDoctorController, GetDoctorController, ListDoctorController, UpdateDoctorController};
+use Lightit\Doctors\App\Controllers\{DeleteDoctorController, GetDoctorController, ListDoctorController, StoreDoctorController, UpdateDoctorController};
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ Route::prefix('users')
 Route::prefix('doctors')
     ->group(static function (): void {
         Route::get('/', ListDoctorController::class);
-        Route::post('/', CreateDoctorController::class);
+        Route::post('/', StoreDoctorController::class);
         Route::prefix('{doctor}')->group(static function (): void {
             Route::get('/', GetDoctorController::class);
             Route::put('/', UpdateDoctorController::class);
