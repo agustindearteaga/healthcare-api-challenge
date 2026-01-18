@@ -9,7 +9,7 @@ use Lightit\Clinics\Domain\Models\Clinic;
 
 class UpsertClinicAction
 {
-    public function execute(Clinic|null $clinic = null, ClinicDto $clinicDto): Clinic
+    public function execute( ClinicDto $clinicDto, Clinic|null $clinic = null): Clinic
     {
         $clinic ??= new Clinic();
 
