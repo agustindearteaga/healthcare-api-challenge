@@ -22,4 +22,3 @@ final class StoreClinicController
             ->setStatusCode(JsonResponse::HTTP_CREATED);
     }
 }
-

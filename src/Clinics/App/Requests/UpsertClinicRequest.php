@@ -26,4 +26,3 @@ class UpsertClinicRequest extends FormRequest
         return new ClinicDto($this->string(self::NAME)->toString(), $this->string(self::ADDRESS)->toString());
     }
 }
-

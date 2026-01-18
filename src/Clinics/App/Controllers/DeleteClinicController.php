@@ -18,4 +18,3 @@ final class DeleteClinicController
         return response()->json(status: JsonResponse::HTTP_NO_CONTENT);
     }
 }
-
