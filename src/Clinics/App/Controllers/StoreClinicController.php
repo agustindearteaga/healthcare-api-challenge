@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Lightit\Clinics\App\Controllers;
+
+use Dedoc\Scramble\Attributes\Group;
+use Illuminate\Http\JsonResponse;
+use Lightit\Clinics\App\Requests\UpsertClinicRequest;
+use Lightit\Clinics\App\Resources\ClinicResource;
+use Lightit\Clinics\Domain\Actions\UpsertClinicAction;
+
+#[Group('Clinics')]
+final class StoreClinicController
+{
+    public function __invoke(UpsertClinicRequest $request, UpsertClinicAction $upsertClinicAction): JsonResponse
+    {
+        $clinic = $upsertClinicAction->execute(null, $request->toDto());
+
+        return ClinicResource::make($clinic)
+            ->response()
+            ->setStatusCode(JsonResponse::HTTP_CREATED);
+    }
+}
+

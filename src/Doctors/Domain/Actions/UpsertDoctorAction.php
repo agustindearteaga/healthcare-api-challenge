@@ -8,7 +8,7 @@ use Lightit\Doctors\Domain\Models\Doctor;
 
 class UpsertDoctorAction
 {
-    public function execute(Doctor|null $doctor = null, string $doctorName): Doctor
+    public function execute(Doctor|null $doctor = null, string $doctorName = ''): Doctor
     {
         $doctor ??= new Doctor();
 
@@ -18,4 +18,3 @@ class UpsertDoctorAction
         return $doctor;
     }
 }
-
