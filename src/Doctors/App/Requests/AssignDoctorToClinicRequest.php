@@ -23,6 +23,7 @@ final class AssignDoctorToClinicRequest extends FormRequest
 
     public function toDto(): AssignDoctorToClinicDto
     {
+        /** @var array<int, int> $clinicIds */
         $clinicIds = $this->validated(self::CLINIC_IDS) ?? [];
 
         return new AssignDoctorToClinicDto(
