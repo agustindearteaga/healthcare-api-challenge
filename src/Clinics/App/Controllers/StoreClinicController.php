@@ -15,7 +15,7 @@ final class StoreClinicController
 {
     public function __invoke(UpsertClinicRequest $request, UpsertClinicAction $upsertClinicAction): JsonResponse
     {
-        $clinic = $upsertClinicAction->execute($request->toDto(), null);
+        $clinic = $upsertClinicAction->execute($request->toDto());
 
         return ClinicResource::make($clinic)
             ->response()

@@ -14,6 +14,7 @@ final class GetClinicController
 {
     public function __invoke(Clinic $clinic): JsonResponse
     {
+        $clinic->loadCount('doctors as doctors_count');
         return ClinicResource::make($clinic)
             ->response();
     }

@@ -19,7 +19,7 @@ final class UpdateClinicController
         UpsertClinicRequest $request,
         UpsertClinicAction $upsertClinicAction,
     ): JsonResponse {
-        $clinic = $upsertClinicAction->execute($request->toDto(),$clinic);
+        $clinic = $upsertClinicAction->execute($request->toDto(), $clinic);
 
         return ClinicResource::make($clinic)
         ->response();
