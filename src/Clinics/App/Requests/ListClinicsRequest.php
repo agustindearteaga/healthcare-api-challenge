@@ -9,6 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 final class ListClinicsRequest extends FormRequest
 {
     public const string PAGE = 'page';
+
     public const string PER_PAGE = 'per_page';
 
     public function rules(): array
@@ -21,11 +22,11 @@ final class ListClinicsRequest extends FormRequest
 
     public function pageNumber(): int
     {
-        return $this->integer(self::PAGE) ?? 1;
+        return $this->integer(self::PAGE, 1);
     }
 
     public function itemsPerPage(): int
     {
-        return $this->integer(self::PER_PAGE) ?? 15;
+        return $this->integer(self::PER_PAGE, 15);
     }
 }
