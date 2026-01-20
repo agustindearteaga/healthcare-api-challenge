@@ -8,18 +8,21 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Lightit\Clinics\Domain\Models\Clinic;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ListClinicAction
+class ListClinicsAction
 {
     /**
-     * @return LengthAwarePaginator<int, \Lightit\Clinics\Domain\Models\Clinic>
+     * @return LengthAwarePaginator<int, Clinic>
      */
-    public function execute(): LengthAwarePaginator
+    public function execute(int $pageNumber, int $itemsPerPage): LengthAwarePaginator
     {
         return QueryBuilder::for(Clinic::class)
             ->allowedFilters(['name'])
             ->allowedSorts('name', 'address')
             ->withCount('doctors as doctors_count')
             ->orderBy('id', 'desc')
-            ->paginate();
+            ->paginate(
+                page: $pageNumber,
+                perPage: $itemsPerPage,
+            );
     }
 }

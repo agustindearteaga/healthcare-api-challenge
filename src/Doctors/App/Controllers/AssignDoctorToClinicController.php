@@ -20,7 +20,7 @@ final class AssignDoctorToClinicController
         $doctor = $assignDoctorToClinicAction->execute($doctor, $request->toDto());
 
         return DoctorResource::make($doctor)
-        ->response()
-        ->setStatusCode(JsonResponse::HTTP_OK);
+            ->response()
+            ->setStatusCode(JsonResponse::HTTP_OK);
     }
 }

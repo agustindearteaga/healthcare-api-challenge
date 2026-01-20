@@ -28,7 +28,7 @@ final class AssignDoctorToClinicRequest extends FormRequest
 
         return new AssignDoctorToClinicDto(
             clinicIds: array_map(
-                static fn (int|string $id): int => (int) $id,
+                static fn (int|string $id): int => $id,
                 $clinicIds
             )
         );
