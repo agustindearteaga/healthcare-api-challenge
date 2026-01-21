@@ -12,8 +12,11 @@ use Lightit\Patients\Domain\Models\Patient;
 
 final readonly class UpdatePatientController
 {
-    public function __invoke(Patient $patient, UpsertPatientRequest $request, UpsertPatientAction $upsertPatientAction): JsonResponse
-    {
+    public function __invoke(
+        Patient $patient,
+        UpsertPatientRequest $request,
+        UpsertPatientAction $upsertPatientAction,
+    ): JsonResponse {
         $patient = $upsertPatientAction->execute($request->toDto(), $patient);
 
         return PatientResource::make($patient)->response();

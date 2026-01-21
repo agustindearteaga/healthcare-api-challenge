@@ -12,7 +12,9 @@ use Lightit\Patients\Domain\Models\Patient;
 final class UpsertPatientRequest extends FormRequest
 {
     public const string FIRST_NAME = 'first_name';
+
     public const string LAST_NAME = 'last_name';
+
     public const string EMAIL = 'email';
 
     /**

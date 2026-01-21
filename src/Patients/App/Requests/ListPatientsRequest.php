@@ -9,6 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 final class ListPatientsRequest extends FormRequest
 {
     public const string PAGE = 'page';
+
     public const string PER_PAGE = 'per_page';
 
     public function rules(): array
