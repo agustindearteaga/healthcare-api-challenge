@@ -19,7 +19,7 @@ final class UpdateDoctorController
         UpsertDoctorRequest $request,
         UpsertDoctorAction $upsertDoctorAction,
     ): JsonResponse {
-        $doctor = $upsertDoctorAction->execute($doctor, $request->getName());
+        $doctor = $upsertDoctorAction->execute($request->getName(), $doctor);
 
         return DoctorResource::make($doctor)
             ->response();
