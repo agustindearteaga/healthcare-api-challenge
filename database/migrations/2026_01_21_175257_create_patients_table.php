@@ -15,9 +15,8 @@ return new class extends Migration
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('email', 100)->unique();
-            $table->created_at();
-            $table->updated_at();
-            $table->softDeletes();
+            $table->timestamps('created_at');
+            $table->timestamps('updated_at');
         });
     }
 

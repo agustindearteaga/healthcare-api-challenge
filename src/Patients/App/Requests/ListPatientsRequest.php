@@ -22,11 +22,11 @@ final class ListPatientsRequest extends FormRequest
 
     public function pageNumber(): int
     {
-        return (int) $this->input(self::PAGE, 1);
+        return $this->input(self::PAGE, 1);
     }
 
     public function itemsPerPage(): int
     {
-        return (int) $this->input(self::PER_PAGE, 15);
+        return $this->input(self::PER_PAGE, 15);
     }
 }
