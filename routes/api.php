@@ -8,6 +8,7 @@ use Lightit\Authentication\App\Controllers\{LoginController, LogoutController, R
 use Lightit\Clinics\App\Controllers\{DeleteClinicController, GetClinicController, ListClinicsController, StoreClinicController, UpdateClinicController};
 use Lightit\Users\App\Controllers\{GetUserController, DeleteUserController, ListUserController, StoreUserController, UpdateUserController};
 use Lightit\Doctors\App\Controllers\{AssignDoctorToClinicController, DeleteDoctorController, GetDoctorController, ListDoctorsController, StoreDoctorController, UpdateDoctorController};
+use Lightit\Patients\App\Controllers\{ListPatientsController, GetPatientController, StorePatientController, UpdatePatientController, DeletePatientController};
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,22 @@ Route::prefix('users')
         })->whereNumber('user');
     });
 
+
+/*
+|--------------------------------------------------------------------------
+| Patients Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('patients')   
+    ->group(static function (): void {
+        Route::get('/', ListPatientsController::class);
+        Route::post('/', StorePatientController::class);
+        Route::prefix('{patient}')->group(static function (): void {
+            Route::get('/', GetPatientController::class);
+            Route::put('/', UpdatePatientController::class);
+            Route::delete('/', DeletePatientController::class);
+        })->whereNumber('patient');
+    });
 /*
 |--------------------------------------------------------------------------
 | Doctors Routes
@@ -76,3 +93,4 @@ Route::prefix('clinics')
             Route::delete('/', DeleteClinicController::class);
         })->whereNumber('clinic');
     });
+
