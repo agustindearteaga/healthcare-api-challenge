@@ -11,7 +11,7 @@ final readonly class DeletePatientController
 {
     public function __invoke(Patient $patient): JsonResponse
     {
-        $patient->delete();
+        $patient->deleteOrFail();
 
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
     }
