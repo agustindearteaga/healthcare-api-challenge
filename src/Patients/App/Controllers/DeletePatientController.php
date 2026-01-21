@@ -13,6 +13,6 @@ final readonly class DeletePatientController
     {
         $patient->deleteOrFail();
 
-        return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
+        return response()->json(status: JsonResponse::HTTP_NO_CONTENT);
     }
 }

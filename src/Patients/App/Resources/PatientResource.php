@@ -6,11 +6,13 @@ namespace Lightit\Patients\App\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Dedoc\Scramble\Attributes\SchemaName;
 use Lightit\Patients\Domain\Models\Patient;
 
 /**
  * @mixin Patient
  */
+#[SchemaName('Patient')]
 final class PatientResource extends JsonResource
 {
     public function toArray(Request $request): array
