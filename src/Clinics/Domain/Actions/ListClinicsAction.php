@@ -21,8 +21,8 @@ class ListClinicsAction
             ->withCount('doctors as doctors_count')
             ->orderBy('id', 'desc')
             ->paginate(
-                page: $pageNumber,
                 perPage: $itemsPerPage,
+                page: $pageNumber,
             );
     }
 }
