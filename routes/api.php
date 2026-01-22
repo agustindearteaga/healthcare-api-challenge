@@ -5,8 +5,9 @@ declare(strict_types=1);
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Route;
 use Lightit\Authentication\App\Controllers\{LoginController, LogoutController, RefreshController};
+use Lightit\Clinics\App\Controllers\{DeleteClinicController, GetClinicController, ListClinicsController, StoreClinicController, UpdateClinicController};
 use Lightit\Users\App\Controllers\{GetUserController, DeleteUserController, ListUserController, StoreUserController, UpdateUserController};
-use Lightit\Doctors\App\Controllers\{DeleteDoctorController, GetDoctorController, ListDoctorController, StoreDoctorController, UpdateDoctorController};
+use Lightit\Doctors\App\Controllers\{AssignDoctorToClinicController, DeleteDoctorController, GetDoctorController, ListDoctorsController, StoreDoctorController, UpdateDoctorController};
 
 /*
 |--------------------------------------------------------------------------
@@ -49,11 +50,29 @@ Route::prefix('users')
 */
 Route::prefix('doctors')
     ->group(static function (): void {
-        Route::get('/', ListDoctorController::class);
+        Route::get('/', ListDoctorsController::class);
         Route::post('/', StoreDoctorController::class);
         Route::prefix('{doctor}')->group(static function (): void {
             Route::get('/', GetDoctorController::class);
             Route::put('/', UpdateDoctorController::class);
             Route::delete('/', DeleteDoctorController::class);
+
+            Route::patch('/clinics', AssignDoctorToClinicController::class);
         })->whereNumber('doctor');
+    });
+
+/*
+|--------------------------------------------------------------------------
+| Clinics Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('clinics')
+    ->group(static function (): void {
+        Route::get('/', ListClinicsController::class);
+        Route::post('/', StoreClinicController::class);
+        Route::prefix('{clinic}')->group(static function (): void {
+            Route::get('/', GetClinicController::class);
+            Route::put('/', UpdateClinicController::class);
+            Route::delete('/', DeleteClinicController::class);
+        })->whereNumber('clinic');
     });
