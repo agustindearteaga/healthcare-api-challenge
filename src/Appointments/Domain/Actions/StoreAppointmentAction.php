@@ -23,8 +23,8 @@ final class StoreAppointmentAction
         $appointment->doctor_id = $appointmentDto->doctorId;
         $appointment->patient_id = $appointmentDto->patientId;
         $appointment->clinic_id = $appointmentDto->clinicId;
-        $appointment->starts_at = $appointmentDto->startsAt->toDateTimeString();
-        $appointment->ends_at = $appointmentDto->endsAt->toDateTimeString();
+        $appointment->starts_at = $appointmentDto->startsAt;
+        $appointment->ends_at = $appointmentDto->endsAt;
         
         $appointment->saveOrFail();
 
