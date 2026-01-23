@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lightit\Appointments\Domain\Exceptions;
-
-use Lightit\Shared\App\Exceptions\Http\HttpException;
+namespace Lightit\Shared\App\Exceptions\Http;
 
 class DoctorNotInClinicException extends HttpException
 {

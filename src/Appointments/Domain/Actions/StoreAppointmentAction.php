@@ -6,17 +6,24 @@ namespace Lightit\Appointments\Domain\Actions;
 
 use Lightit\Appointments\Domain\DataTransferObjects\AppointmentDto;
 use Lightit\Appointments\Domain\Exceptions\AppointmentOverlapException;
-use Lightit\Appointments\Domain\Exceptions\DoctorNotInClinicException;
 use Lightit\Appointments\Domain\Models\Appointment;
-use Lightit\Doctors\Domain\Models\Doctor;
+use Lightit\Doctors\Domain\Actions\ValidateDoctorBelongsToClinicAction;
 
 final class StoreAppointmentAction
 {
+    public function __construct(
+        private readonly ValidateDoctorBelongsToClinicAction $validateDoctorBelongsToClinicAction,
+    ) {
+    }
+
     public function execute(AppointmentDto $appointmentDto): Appointment
     {
         $this->appointmentOverlapsForDoctor($appointmentDto);
         $this->appointmentOverlapsForPatient($appointmentDto);
-        $this->doctorBelongsToClinic($appointmentDto);
+        $this->validateDoctorBelongsToClinicAction->execute(
+            doctorId: $appointmentDto->doctorId,
+            clinicId: $appointmentDto->clinicId,
+        );
 
         $appointment = new Appointment();
 
@@ -54,20 +61,6 @@ final class StoreAppointmentAction
 
         if ($appointmentOverlaps) {
             throw new AppointmentOverlapException('The appointment overlaps with another appointment for the patient');
-        }
-    }
-
-    private function doctorBelongsToClinic(AppointmentDto $appointmentDto): void
-    {
-        $doctorBelongsToClinic = Doctor::query()->where('id', $appointmentDto->doctorId)
-        ->whereHas(
-            'clinics',
-            fn (\Illuminate\Contracts\Database\Query\Builder $q) => $q->where('clinics.id', $appointmentDto->clinicId)
-        )
-        ->exists();
-
-        if (! $doctorBelongsToClinic) {
-            throw new DoctorNotInClinicException();
         }
     }
 }
