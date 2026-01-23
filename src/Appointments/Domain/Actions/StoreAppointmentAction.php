@@ -31,7 +31,7 @@ final class StoreAppointmentAction
         return $appointment->load(['doctor', 'patient', 'clinic']);
     }
 
-    public function appointmentOverlapsForDoctor(AppointmentDto $appointmentDto): void
+    private function appointmentOverlapsForDoctor(AppointmentDto $appointmentDto): void
     {
         $appointmentOverlaps = Appointment::withoutTrashed()
             ->where('doctor_id', $appointmentDto->doctorId)
@@ -44,7 +44,7 @@ final class StoreAppointmentAction
         }
     }
 
-    public function appointmentOverlapsForPatient(AppointmentDto $appointmentDto): void
+    private function appointmentOverlapsForPatient(AppointmentDto $appointmentDto): void
     {
         $appointmentOverlaps = Appointment::withoutTrashed()
             ->where('patient_id', $appointmentDto->patientId)
@@ -57,13 +57,16 @@ final class StoreAppointmentAction
         }
     }
 
-    public function doctorBelongsToClinic(AppointmentDto $appointmentDto): void
+    private function doctorBelongsToClinic(AppointmentDto $appointmentDto): void
     {
-        $doctorBelongsToClinic = Doctor::where('id', $appointmentDto->doctorId)
-        ->whereHas('clinics', fn($q) => $q->where('clinics.id', $appointmentDto->clinicId))
+        $doctorBelongsToClinic = Doctor::query()->where('id', $appointmentDto->doctorId)
+        ->whereHas(
+            'clinics',
+            fn (\Illuminate\Contracts\Database\Query\Builder $q) => $q->where('clinics.id', $appointmentDto->clinicId)
+        )
         ->exists();
 
-        if (!$doctorBelongsToClinic) {
+        if (! $doctorBelongsToClinic) {
             throw new DoctorNotInClinicException();
         }
     }

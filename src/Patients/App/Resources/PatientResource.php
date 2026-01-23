@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Lightit\Patients\App\Resources;
 
+use Dedoc\Scramble\Attributes\SchemaName;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Dedoc\Scramble\Attributes\SchemaName;
 use Lightit\Patients\Domain\Models\Patient;
 
 /**

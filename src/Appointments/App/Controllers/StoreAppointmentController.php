@@ -12,9 +12,9 @@ use Lightit\Appointments\Domain\Actions\StoreAppointmentAction;
 final readonly class StoreAppointmentController
 {
     public function __invoke(
-        StoreAppointmentRequest $request, 
-        StoreAppointmentAction $storeAppointmentAction): JsonResponse
-    {
+        StoreAppointmentRequest $request,
+        StoreAppointmentAction $storeAppointmentAction,
+    ): JsonResponse {
         $appointment = $storeAppointmentAction->execute($request->toDto());
 
         return AppointmentResource::make($appointment)

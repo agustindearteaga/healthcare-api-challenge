@@ -11,8 +11,10 @@ use Lightit\Appointments\Domain\Actions\ListAppointmentsAction;
 
 final readonly class ListAppointmentsController
 {
-    public function __invoke(ListAppointmentsRequest $request, ListAppointmentsAction $listAppointmentsAction): JsonResponse
-    {
+    public function __invoke(
+        ListAppointmentsRequest $request,
+        ListAppointmentsAction $listAppointmentsAction,
+    ): JsonResponse {
         $appointments = $listAppointmentsAction->execute(
             pageNumber: $request->pageNumber(),
             itemsPerPage: $request->itemsPerPage(),

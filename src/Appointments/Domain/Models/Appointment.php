@@ -12,14 +12,14 @@ use Lightit\Doctors\Domain\Models\Doctor;
 use Lightit\Patients\Domain\Models\Patient;
 
 /**
- * @property int                     $id
- * @property int                     $doctor_id
- * @property int                     $patient_id
- * @property int                     $clinic_id
- * @property \Carbon\CarbonImmutable $starts_at
- * @property \Carbon\CarbonImmutable $ends_at
- * @property \Carbon\CarbonImmutable $created_at
- * @property \Carbon\CarbonImmutable $updated_at
+ * @property int                          $id
+ * @property int                          $doctor_id
+ * @property int                          $patient_id
+ * @property int                          $clinic_id
+ * @property \Carbon\CarbonImmutable      $starts_at
+ * @property \Carbon\CarbonImmutable      $ends_at
+ * @property \Carbon\CarbonImmutable      $created_at
+ * @property \Carbon\CarbonImmutable      $updated_at
  * @property \Carbon\CarbonImmutable|null $deleted_at
  * @property-read Doctor $doctor
  * @property-read Patient $patient
